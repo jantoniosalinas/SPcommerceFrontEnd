@@ -15,7 +15,6 @@ export default function Home() {
     return (
         <Page>
             <Layout>
-                <h1>Soy home</h1>    
             </Layout>
         </Page>
     )

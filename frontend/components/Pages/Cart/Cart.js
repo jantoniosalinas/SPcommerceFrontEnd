@@ -1,13 +1,16 @@
 //import React from 'react'
 import Page from '../Page'
 import Layout from '../../Layout'
+import Header from '../../Layout/Header'
+import Footer from '../../Layout/Footer'
 
 export default function Cart() {
     return (
+        <>
         <Page>
-            <Layout>
-                 <h2>Cart Page</h2>         
-            </Layout>
+            <Header />
+            <Footer />
         </Page>
+        </>
     )
 }
