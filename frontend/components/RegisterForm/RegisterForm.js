@@ -9,7 +9,7 @@ import { GiSaveArrow, GiSmartphone } from 'react-icons/gi'
 import { MdOutlineInput, MdEmojiPeople } from 'react-icons/md'
 
 import styles from './RegisterForm.module.scss'
-
+    
 const BACKEND_URL = 'http://localhost:5000'
 console.log(BACKEND_URL)
 

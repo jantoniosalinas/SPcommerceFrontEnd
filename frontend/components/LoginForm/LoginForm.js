@@ -41,6 +41,7 @@ export default function LoginForm() {
         .then(response => {
               console.log(response.data)
               window.sessionStorage.setItem('token', response.data?.token)
+              window.sessionStorage.setItem('email', response.data?.email)
               router.push('/home')
         })
         .catch( err => {
