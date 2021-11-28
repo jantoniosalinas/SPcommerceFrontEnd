@@ -10,7 +10,7 @@ import queryString from 'query-string'
 
 import styles from './../components/Principal/Principal.module.scss'
 
-export default function Detail (  ) {
+export default function Detail() {
     const search = window.location.search;
     const params = new URLSearchParams(search);
     const sku=params.get('sku');

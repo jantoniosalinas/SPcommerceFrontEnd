@@ -4,6 +4,7 @@ import Page from '../Page'
 import Layout from '../../Layout'
 
 export default function Home() {
+    
     const [ token, setToken ] = useState('');
     
     useEffect(() => {

@@ -6,7 +6,7 @@ import { faHome } from '@fortawesome/free-solid-svg-icons';
 import { FaShoppingCart } from 'react-icons/fa'
 
 const Header = () => {
-    return (
+        return (
         <>
             <Head>
                 <title>SP ecommerce</title>
@@ -35,7 +35,7 @@ const Header = () => {
                                 </button> 
                             </Link>
                             <span>  </span>
-                            <Link href='/shoppingcart'>
+                            <Link href='/home'>
                                 <button className='button is-normal is-info is-light'>
                                     <span className='icon'>
                                     <FaShoppingCart />

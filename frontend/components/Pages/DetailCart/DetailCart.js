@@ -1,7 +1,9 @@
 import axios from 'axios'
 import  React, { useState, useEffect } from 'react'
-import { MdEventBusy, MdOutlineAddShoppingCart } from 'react-icons/md' 
+import { MdEventBusy, MdOutlineAddShoppingCart } from 'react-icons/md'
+import { BsSave } from 'react-icons/bs' 
 import styles from './DetailCart.module.scss'
+import Link from 'next/link'
 
 const BACKEND_URL = 'http://localhost:5000'
 console.log(BACKEND_URL)
@@ -31,52 +33,40 @@ const DetailCart = ( {sku} ) => {
 
      const handleAddProduct = ( evt, product ) => {
            evt.stopPropagation()
-           const { id, sku, product_name, price, quantity }  = product
-           console.log('tp',total_price,quantity)
-           const total_price = quantity*price
-           console.log(total_price)
-           const myProduct = {id, sku, product_name, price, quantity, total_price }
+           const { id, sku, product_name, price }  = product
+           const product_quantity = 1
+           const total_price = product_quantity*price
+           //console.log('tp',total_price,product_quantity)
+           
+           const myProduct = { id, sku, product_name, price, product_quantity, total_price }
            setCart(cart.concat(myProduct))
-           console.log(cart)
+           //console.log(cart)
+        
      }
 
      const saveCart = ( evt, idShoppingCart) => {
-        console.log(cart) 
-        evt.stopPropagation()
-        axios.post(`${BACKEND_URL}/products/carts`,{
-            idShoppingCart,
-            statusCart:1,
-            storage: cart
-        },{
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-        .then(response => {
-              console.log(response.data)
-              alert('Producto agregado correctamente....')
-              //router.push('/home')
-        })
+           evt.stopPropagation()
+           //console.log(cart) 
+        
+           const sToken = window.sessionStorage.getItem('token');
+           if ( ! sToken ) {
+               return alert ('Debes abrir sesión para poder guardar un producto')
+           }
 
-     /*    axios({
-             url: `${BACKEND_URL}/products/carts`,
-             method: 'post',
-             headers: {
-                'Content-Type': 'application/json'
-             },
-             data: {
-                 idShoppingCart,
-                 statusCart: 1,
-                 storage: cart
-             } 
-         })
-         .then( r => {
-             console.log(r.data)
-         })
-         .catch( err => {
-             console.error(err)
-         })
-       */
+           axios.post(`${BACKEND_URL}/products/carts`,{
+               idShoppingCart,
+               statusCart: "Orden",
+               storage: cart
+           },{
+               headers: {
+                   'Content-Type': 'application/json'
+               }
+           })
+           .then(response => {
+                 console.log(response.data)
+                 alert('Producto agregado correctamente....')
+                 //router.push('/home')
+           })
      }
 
      return (
@@ -87,7 +77,7 @@ const DetailCart = ( {sku} ) => {
                 //productDetail.map( product => { 
                     <div className={`card styles.box styles.grid`}>
                         <div className='card-image'>
-                            <figure className='image is-4by3'>
+                            <figure className='image is-256x256'>
                                 <img src={productDetail.image} alt='Placeholder image' />
                             </figure>
                         </div>
@@ -96,8 +86,8 @@ const DetailCart = ( {sku} ) => {
                                 <div className='media-content'>
                                     <p className='title is-4'>{productDetail.product_name}</p>
                                     <p className='subtitle is-6'>{productDetail.description}</p>
-                                    <p className='subtitle is-6'>{productDetail.sku}</p>
-                                    <p className='subtitle is-6'>Disponibles: {productDetail.quantity}</p>
+                                    <p className='subtitle is-6'>SKU: <strong>{productDetail.sku}</strong></p>
+                                    <p className='subtitle is-6'>Disponibles: <strong>{productDetail.quantity}</strong></p>
                                 </div>
                             </div>
                             <div className='content'>
@@ -107,7 +97,11 @@ const DetailCart = ( {sku} ) => {
                             </div>
                             <div className='content'>
                                 <span>Calificación : 
-                                   <strong> {productDetail.likes}</strong>
+                                   <strong> {productDetail.likes}
+                                   </strong>
+                                </span>
+                                <span>
+                                <img className = "image is-16x16" src="star_on.png" alt='likes' />
                                 </span>
                             </div>
                             <div className='content'>
@@ -116,15 +110,29 @@ const DetailCart = ( {sku} ) => {
                                 </span>
                             </div>
                             <div className='content'>
-                                <button className='button is-primary' 
+                                <button className='button is-small is-info' 
                                         onClick={e => handleAddProduct(e,productDetail)}>
-                                    <span className='icon is-small is-left'>
+                                    <span>Agregar</span>
+                                    <span className='icon is-small is-rigth'>
                                         <MdOutlineAddShoppingCart />
                                     </span>
-                                     Agregar
                                 </button>
                                 <span> </span>
-                                <button className='button is-primary' onClick={e => saveCart(e, window.sessionStorage.getItem('email'))}>Salvar Compra</button>
+                                <button className='button is-small is-info' onClick={e => saveCart(e, window.sessionStorage.getItem('email'))}>
+                                    <span>Salvar Compra</span>
+                                    <span className='icon is-small is-rigth'>
+                                    <BsSave />
+                                    </span>
+                                </button>
+                                <span> </span>
+                                <Link href={{ pathname:'showCart', query: { email: `${window.sessionStorage.getItem('email')}` }}}>
+                                      <button className='button is-small is-info'>
+                                      <span>Ver Carrito</span>
+                                      <span className='icon is-small is-rigth'>
+                                        <MdOutlineAddShoppingCart />
+                                      </span>
+                                      </button>
+                                </Link>
                             </div>
                         </div>
                     </div>

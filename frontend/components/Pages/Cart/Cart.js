@@ -41,7 +41,7 @@ const Cart = ({ classBook }) => {
                 list.map(product => 
                     <div className={`card styles.box styles.grid`}>
                         <div className='card-image'>
-                            <figure className='image is-4by3'>
+                            <figure className='image is-256x256'>
                                 <img src={product.image} alt='Placeholder image' />
                             </figure>
                         </div>
@@ -59,13 +59,13 @@ const Cart = ({ classBook }) => {
                             </div>
                             <div className='content'>
                                 <span>Calificación : 
-                                   <strong> {product.likes}</strong>
+                                    <strong> {product.likes} </strong>
+                                    <img className = "image is-16x16" src="star_on.png" alt='likes' />
                                 </span>
                             </div>
                             <div className='content'>
-                                
                                 <Link href={{ pathname:'detail', query: { sku: `${product.sku}` }}}>
-                                    <button className='button is-info'>Ver</button>
+                                    <button className='button is-small is-info'>Ver</button>
                                 </Link>
                             </div>
                         </div>
@@ -78,29 +78,24 @@ const Cart = ({ classBook }) => {
      )
 }
 
-/*
-<button className='button is-info'>
-                                        <span className='icon is-small is-left'>
-                                            <VscPreview />
-                                        </span>
-                                        Ver
-                                    </button>
-                                    */
+
 const buildStart = (stars) => {
     const max_stars = 5;
     let stars_off = 0;
-    let html_stars = ''
+    let html_stars = ""; //"<figure className='image is-4by3'>"
 
     for ( let i = 0; i < stars; i++ ) {
-          html_stars += "<img src='star_on.png' />";
+          html_stars += "<img src='star_on.png' alt='1' />";
     }
       
     if ( stars < max_stars ) {
          stars_off = max_stars - stars;    
          for ( let i = 0; i < stars_off; i++ ) {
-               html_stars += "<img src='star_off.png' />";
+               html_stars += "<img src='star_off.png' alt='2' />";
          }
     }
+
+    //html_stars += "</figure>"
     return html_stars
 }
 

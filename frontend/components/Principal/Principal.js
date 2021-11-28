@@ -4,10 +4,27 @@ import styles from './Principal.module.scss'
 import { BiUserPlus } from 'react-icons/bi'
 import Image from 'next/image'
 import Link from 'next/link'
-
+import { useState, useEffect } from 'react'
 import RegisterForm from "../RegisterForm"
+import Logout from "../Layout/Logout"
+
 
 export default function Principal() {
+  const [ isLogin,setIsLogin ] = useState(false)
+
+  useEffect(() => {
+    const sToken = window.sessionStorage.getItem('token')
+    //const sMail = window.sessionStorage.getItem('email')
+    if ( sToken ) {
+        setIsLogin(true)
+        console.log(`Token ${sToken} Log ${isLogin}`)
+    } 
+    else {
+      setIsLogin(false)
+      console.log(`Token ${sToken} Log ${isLogin}`)
+    }
+  }, [])
+
     return (
         <div className='tile is-ancestor'>
           <div className='tile is-vertical is-8'>
@@ -65,7 +82,14 @@ export default function Principal() {
                 <p className='title'>SPcommerce</p>
                 <p className='subtitle'></p>
                 <div className='content'>
-                  <LoginForm /> 
+                  { !isLogin && (
+                   <LoginForm />
+                  )
+                  }
+                  { isLogin && (
+                    <Logout />
+                  )
+                  }
                 </div>
                 <div className={`content ${styles.aligned}`}>
                   <Link href='/register'>

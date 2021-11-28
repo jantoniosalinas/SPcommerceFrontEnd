@@ -7,6 +7,7 @@ import { AiFillLock } from 'react-icons/ai'
 import { IoStorefront } from 'react-icons/io'
 
 import styles from './LoginForm.module.scss'
+import { faUserAltSlash } from '@fortawesome/free-solid-svg-icons'
 
 const BACKEND_URL = 'http://localhost:5000'
 console.log(BACKEND_URL)
@@ -15,6 +16,8 @@ export default function LoginForm() {
     const [ formData, setFormData ] = useState({})
     const [ isLoading, setIsLoading ] = useState(false)
     const [ isError, setIsError ] = useState(false)
+    const [ isLogin, setIsLogin] = useState(false)
+
     const router = useRouter()
 
     const handleOnChange = (event) => {
@@ -39,7 +42,7 @@ export default function LoginForm() {
             }
         })
         .then(response => {
-              console.log(response.data)
+              //console.log(response.data)
               window.sessionStorage.setItem('token', response.data?.token)
               window.sessionStorage.setItem('email', response.data?.email)
               router.push('/home')
@@ -52,10 +55,12 @@ export default function LoginForm() {
         })
     }
     return (
+         
         <div className={`section box ${styles.login}`}>
             <div className='content'>
                 <h4>Login</h4>   
                 <form onSubmit={e => handleSubmit(e)}>
+                
                     <div className='field'>
                         <p className='control has-icons-left has-icons-right'>
                             <input
@@ -94,6 +99,6 @@ export default function LoginForm() {
                     </div>
                 </form>
             </div>
-        </div>
+        </div>        
     )
 }
