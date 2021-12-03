@@ -11,8 +11,11 @@ import queryString from 'query-string'
 import styles from './../components/Principal/Principal.module.scss'
 
 export default function Detail() {
-    const search = window.location.search;
-    if ( !search ) { search = null }
+    let search = null;
+    if ( window ) {
+         search = window.location.search;
+    }
+    //console.log('Error',window.location.search)
     const params = new URLSearchParams(search);
     const sku = search.length > 0 ? params.get('sku'): null;
     //const val=value.sku;
