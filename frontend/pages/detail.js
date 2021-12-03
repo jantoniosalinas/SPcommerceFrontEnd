@@ -12,7 +12,7 @@ import styles from './../components/Principal/Principal.module.scss'
 
 export default function Detail() {
     let search = null;
-    if ( window != null ) {
+    if ( typeof window !== "undefined" ) {
          search = window.location.search;
     }
     //console.log('Error',window.location.search)
