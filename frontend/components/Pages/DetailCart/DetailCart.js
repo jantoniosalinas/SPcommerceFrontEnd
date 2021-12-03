@@ -29,6 +29,9 @@ const DetailCart = ( {sku} ) => {
              setProductDetail(products)
              //console.log(products)
          })
+         if ( typeof window === "undefined" ) {
+               window = {}
+         }
      }, [])
 
      const handleAddProduct = ( evt, product ) => {
