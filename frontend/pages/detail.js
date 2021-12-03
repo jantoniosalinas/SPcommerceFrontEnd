@@ -11,13 +11,15 @@ import queryString from 'query-string'
 import styles from './../components/Principal/Principal.module.scss'
 
 export default function Detail() {
-    let search = '';
+    let search = null;
+    let params = null;
+    let sku = null;
     if ( typeof window !== "undefined" ) {
          search = window.location.search;
+         params = new URLSearchParams(search);
+         sku = params.get('sku');
     }
     //console.log('Error',window.location.search)
-    const params = new URLSearchParams(search);
-    const sku = search.length > 0 ? params.get('sku'): null;
     //const val=value.sku;
     //console.log(`SKU.... ${search} -- ${params} --- ${sku}`)
     //sku='SPID2021000006'
