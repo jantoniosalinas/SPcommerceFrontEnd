@@ -12,8 +12,9 @@ import styles from './../components/Principal/Principal.module.scss'
 
 export default function Detail() {
     const search = window.location.search;
+    if ( !search ) { search = null }
     const params = new URLSearchParams(search);
-    const sku=params.get('sku');
+    const sku = search.length > 0 ? params.get('sku'): null;
     //const val=value.sku;
     //console.log(`SKU.... ${search} -- ${params} --- ${sku}`)
     //sku='SPID2021000006'
