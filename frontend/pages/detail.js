@@ -11,7 +11,7 @@ import queryString from 'query-string'
 import styles from './../components/Principal/Principal.module.scss'
 
 export default function Detail() {
-    let search = null;
+    let search = '';
     if ( typeof window !== "undefined" ) {
          search = window.location.search;
     }
