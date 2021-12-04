@@ -10,6 +10,8 @@ console.log(BACKEND_URL)
 
 const Cart = ({ classBook }) => {
      const [ list, setList ] = useState([])
+     const [ isError, setIsError ] = useState(false)
+
      const getProductsByCategory = () => {
          return axios.get(`${BACKEND_URL}/products/search/${classBook}`, {
             headers: {
@@ -17,6 +19,9 @@ const Cart = ({ classBook }) => {
             }
          }).then ( data => {
              return data.data
+         })
+         .catch(err => {
+             setIsError(true)
          })
      }
 
@@ -37,7 +42,13 @@ const Cart = ({ classBook }) => {
         <section className='section is-medium'>
             <div className='container'>
                 <div className={styles.grid}>
-            {
+            { isError &&
+                <div className='notification is-danger is-light'>
+                    <button className='delete'></button>
+                    No hay conexión al servidor ...
+                </div> 
+            }
+            { !isError &&
                 list.map(product => 
                     <div className={`card styles.box styles.grid`}>
                         <div className='card-image'>

@@ -10,6 +10,11 @@ import queryString from 'query-string'
 import styles from './../components/Principal/Principal.module.scss'
 
 export default function Detail() {
+    
+    if ( typeof window === "undefined" ) {
+        window = {}
+    }
+    console.log('Alert',window)
     let search = null;
     let params = null;
     let sku = null;

@@ -10,6 +10,9 @@ import queryString from 'query-string'
 //import styles from './../components/Principal/Principal.module.scss'
 
 export default function sCart() {
+    if ( typeof window === "undefined" ) {
+        window = {}
+    }
     const search = window.location.search;
     const params = new URLSearchParams(search);
     const email=params.get('email');
