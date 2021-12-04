@@ -2,12 +2,13 @@ import axios from 'axios'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { FiLogIn } from 'react-icons/fi'
-import { FaDyalog, FaUserAlt } from 'react-icons/fa'
+//import { FaDyalog, FaUserAlt } from 'react-icons/fa'
+import { FaUserAlt } from 'react-icons/fa'
 import { AiFillLock } from 'react-icons/ai'
-import { IoStorefront } from 'react-icons/io'
+//import { IoStorefront } from 'react-icons/io'
 
 import styles from './LoginForm.module.scss'
-import { faUserAltSlash } from '@fortawesome/free-solid-svg-icons'
+//import { faUserAltSlash } from '@fortawesome/free-solid-svg-icons'
 
 const BACKEND_URL = 'http://localhost:5000'
 console.log(BACKEND_URL)

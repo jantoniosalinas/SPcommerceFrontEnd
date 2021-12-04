@@ -1,5 +1,6 @@
 import axios from 'axios'
-import  React, { useState, useEffect } from 'react'
+//import  React, { useState, useEffect } from 'react'
+import  { useState, useEffect } from 'react'
 import { MdEventBusy, MdOutlineAddShoppingCart } from 'react-icons/md'
 import { BsSave } from 'react-icons/bs' 
 import styles from './DetailCart.module.scss'
@@ -12,6 +13,7 @@ const DetailCart = ( {sku} ) => {
      //console.log(`My SKU = ${sku}`)
      const [ productDetail, setProductDetail ] = useState([])
      const [ cart, setCart ] = useState([])
+     const { isError, setIsError } = useState(false)
 
      const getProductById = () => {
          return axios.get(`${BACKEND_URL}/products/sku/${sku}`, {
@@ -21,6 +23,10 @@ const DetailCart = ( {sku} ) => {
          }).then ( data => {
              return data.data
          })
+         .catch ( err => {
+             setIsError(true)
+         })
+        
      }
 
      useEffect(() => {
@@ -29,9 +35,9 @@ const DetailCart = ( {sku} ) => {
              setProductDetail(products)
              //console.log(products)
          })
-         if ( typeof window === "undefined" ) {
+         /*if ( typeof window === 'undefined' ) {
                window = {}
-         }
+         }*/
      }, [])
 
      const handleAddProduct = ( evt, product ) => {
@@ -76,7 +82,7 @@ const DetailCart = ( {sku} ) => {
         <section className='section is-medium'>
             <div className='container'>
                 <div className={styles.grid}>
-            {   
+            {   !isError &&
                 //productDetail.map( product => { 
                     <div className={`card styles.box styles.grid`}>
                         <div className='card-image'>
@@ -140,6 +146,13 @@ const DetailCart = ( {sku} ) => {
                         </div>
                     </div>
                 //})
+            }
+            {
+                isError && 
+                <div className='notification is-danger is-light'>
+                            <button className='delete'></button>
+                            No se puede mostrar el producto ...
+                </div>
             }
                 </div>
             </div>

@@ -1,7 +1,8 @@
 import axios from 'axios'
-import React, { useState, useEffect } from 'react'
-import { MdOutlineAddShoppingCart } from 'react-icons/md' 
-import { VscPreview } from 'react-icons/vsc'
+//import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
+//import { MdOutlineAddShoppingCart } from 'react-icons/md' 
+//import { VscPreview } from 'react-icons/vsc'
 import Link from 'next/link'
 import styles from './Cart.module.scss'
 
@@ -20,7 +21,7 @@ const Cart = ({ classBook }) => {
          }).then ( data => {
              return data.data
          })
-         .catch(err => {
+         .catch ( err => {
              setIsError(true)
          })
      }
@@ -32,11 +33,6 @@ const Cart = ({ classBook }) => {
          })
      }, [])
    
-     const myButton = React.forwardRef(({ onClick, href }, ref) => {
-         return (
-             <a href={href} onClick={onClick} ref={ref}>Ver</a>
-         )
-     })
 
      return (
         <section className='section is-medium'>
@@ -49,8 +45,8 @@ const Cart = ({ classBook }) => {
                 </div> 
             }
             { !isError &&
-                list.map(product => 
-                    <div className={`card styles.box styles.grid`}>
+                list.map((product,index) => 
+                    <div key={index} className={`card styles.box styles.grid`}>
                         <div className='card-image'>
                             <figure className='image is-256x256'>
                                 <img src={product.image} alt='Placeholder image' />
@@ -75,25 +71,24 @@ const Cart = ({ classBook }) => {
                                 </span>
                             </div>
                             <div className='content'>
-                                <Link href={{ pathname:'detail', query: { sku: `${product.sku}` }}}>
+                                <Link href={{ pathname:'detail', query: { sku: `${product.sku}`}}}>
                                     <button className='button is-small is-info'>Ver</button>
                                 </Link>
                             </div>
                         </div>
                     </div>
-                )
-            }
+                    )
+                }
                 </div>
             </div>
         </section>
      )
-}
-
-
-const buildStart = (stars) => {
-    const max_stars = 5;
-    let stars_off = 0;
-    let html_stars = ""; //"<figure className='image is-4by3'>"
+    }
+        
+    const buildStart = (stars) => {
+        const max_stars = 5;
+        let stars_off = 0;
+        let html_stars = ""; //"<figure className='image is-4by3'>"
 
     for ( let i = 0; i < stars; i++ ) {
           html_stars += "<img src='star_on.png' alt='1' />";

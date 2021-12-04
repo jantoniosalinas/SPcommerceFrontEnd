@@ -5,27 +5,27 @@ import Info from '../components/Pages/Info'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 //import LoginForm from '../components/LoginForm'
-import Link from 'next/link'
+//import Link from 'next/link'
 //import { BiUserPlus } from 'react-icons/bi'
-import queryString from 'query-string'
+//import queryString from 'query-string'
 //import styles from './../components/Principal/Principal.module.scss'
 
 export default function sCart() {
     const [ isError, setIsError ] = useState(false)
     const router = useRouter()
 
-    if ( typeof window === "undefined" ) {
+    if ( typeof window === 'undefined' ) {
         window = {}
         setIsError(true)
     }
-    let search = null;
+    /*let search = null;
     let params = null;
     let email = null;
-    if ( typeof window !== "undefined" ) {
-         search = window.location.search;
-         params = new URLSearchParams(search);
-         email=params.get('email');
-    }
+    if ( typeof window !== 'undefined' ) {*/
+         const search = window.location.search;
+         const params = new URLSearchParams(search);
+         const email = params.get('email');
+    //}
 
     if ( !email ) {
         return alert("Error en email")

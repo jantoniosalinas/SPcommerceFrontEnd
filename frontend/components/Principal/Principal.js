@@ -2,10 +2,10 @@
 import LoginForm from "../LoginForm"
 import styles from './Principal.module.scss'
 import { BiUserPlus } from 'react-icons/bi'
-import Image from 'next/image'
+//import Image from 'next/image'
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
-import RegisterForm from "../RegisterForm"
+//import RegisterForm from "../RegisterForm"
 import Logout from "../Layout/Logout"
 
 
@@ -17,11 +17,11 @@ export default function Principal() {
     //const sMail = window.sessionStorage.getItem('email')
     if ( sToken ) {
         setIsLogin(true)
-        console.log(`Token ${sToken} Log ${isLogin}`)
+        //console.log(`Token ${sToken} Log ${isLogin}`)
     } 
     else {
       setIsLogin(false)
-      console.log(`Token ${sToken} Log ${isLogin}`)
+      //console.log(`Token ${sToken} Log ${isLogin}`)
     }
   }, [])
 
