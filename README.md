@@ -130,6 +130,30 @@ En el archivo package.json dentro de la sección **"scripts"** se pueden agregar
 ## Para realizar las pruebas de funcionamiento
 Ingresar en el navegador la url **http://localhost:3000**
 
+
+## Deployment
+
+      Se uso netlify ( https://www.netlify.com/ ) para realizar la publicación de la página
+
+      1. Apuntar a su cuenta de Github
+      2. Seleccionar el repositorio a desplegar
+      3. Seleccionar el base directory, es este caso frontend
+      4. En build command colocar npm run build
+      5. En Publish directory apuntar a .next, para este caso frontend/.next
+
+      Se debe instalar el plugin **Essential Next.js** para que se realize de forma correcta el deploy
+      @netlify/plugin-nextjs
+      6. Entrar el sitio que se quiere desplegar
+      7. Ir a opción Plugins
+      8. Seleccionar instalar plugin Essential Next.js
+      9. Realizar nuevamente el deploy y ahora sí se generará de forma correcta el sitio.
+
+**DEMO**
+
+            https://awesome-fermat-e7e258.netlify.app/
+      
+      
+      
 #### Comentarios
     La aplicación FrontEnd de SP ecommerce sigue en mejora continua, siempre buscando aplicar las mejores practicas de lo
     aprendido en el UCAMP.
