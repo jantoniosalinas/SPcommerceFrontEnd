@@ -11,53 +11,35 @@ import { useState } from 'react'
 //import styles from './../components/Principal/Principal.module.scss'
 
 export default function sCart() {
-    const [ isError, setIsError ] = useState(false)
     const router = useRouter()
 
-    if ( typeof window === 'undefined' ) {
-        window = {}
-        setIsError(true)
+    const isBrowser = typeof window !== "undefined";
+    //console.log('estoy en',isBrowser)
+    if ( !isBrowser ) {
+        return null
     }
-    /*let search = null;
-    let params = null;
-    let email = null;
-    if ( typeof window !== 'undefined' ) {*/
-         const search = window.location.search;
-         const params = new URLSearchParams(search);
-         const email = params.get('email');
-    //}
+    const search = window.location.search;
+    const params = new URLSearchParams(search);
+    const email = params.get('email');
 
     if ( !email ) {
         return alert("Error en email")
     }
-    //const val=value.sku;
-    //console.log(`SKU.... ${search} -- ${params} --- ${sku}`)
-    //sku='SPID2021000006'
+
     return (
         <>
         <Header />
             <div className='container columns'>
-                { !isError &&
-                    <>
-                    <div className='content'>
-                        <ShowCart email={email} />
-                    </div>
-                    <div className='tile is-parent'>
-                        <article className='tile is-child notification'>
-                            <div className='content'>
-                            <Info email={email} />                             
-                            </div>
-                        </article>
-                    </div>
-                    </>
-                }
-                {
-                    isError &&
-                    <div className='notification is-danger is-light'>
-                            <button className='delete'></button>
-                            No se puede mostrar el producto ...
-                    </div>
-                }
+                <div className='content'>
+                    <ShowCart email={email} />
+                </div>
+                <div className='tile is-parent'>
+                    <article className='tile is-child notification'>
+                        <div className='content'>
+                        <Info email={email} />                             
+                        </div>
+                    </article>
+                </div>
             </div>
         <Footer />
         </>
